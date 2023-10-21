@@ -1,0 +1,143 @@
+name: together_online
+description: Together Online
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.1.3+14
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+  flutter: '>=3.13.8'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+#  flutter_cupertino_localizations: ^1.0.1
+#  flutter_statusbarcolor: ^0.2.3
+  cloud_firestore: ^4.11.0
+  firebase_core: ^2.19.0
+  firebase_auth: ^4.11.1
+  firebase_analytics: ^10.6.1
+  firebase_messaging: ^14.7.1
+  firebase_storage: any
+  google_sign_in: ^6.1.5
+#  flutter_facebook_login: 3.0.0
+#  clip_shadow: any
+  localstorage: ^4.0.0+1
+  intl: ^0.17.0
+
+  percent_indicator: ^4.2.3
+#  flutter_swiper: ^1.1.6
+  auto_size_text: ^3.0.0
+  flutter_inappwebview: ^5.4.3+7
+  http: ^0.13.4  
+  cached_network_image: ^3.2.0
+  image_picker: ^1.0.4 
+  algolia: ^1.0.4
+  package_info: ^2.0.2
+  retrofit: ^4.0.3
+  logger: ^2.0.2+1
+#  flutter_flipperkit: ^0.0.28
+  json_serializable: ^6.1.3
+  mobx: ^2.0.6+1
+  flutter_mobx: ^2.0.3+2
+  pretty_dio_logger: ^1.2.0-beta-1
+  qr_code_scanner: any
+  permission_handler: ^11.0.1
+  pin_code_text_field: ^1.8.0
+  collection: ^1.15.0-nullsafety.4
+  devicelocale: ^0.7.0
+  advance_pdf_viewer: any
+  url_launcher: ^6.0.20
+  flutter_html: ^3.0.0-beta.2
+  flutter_svg: ^2.0.7
+
+#  sign_in_with_apple: ^5.0.0
+  crypto: ^3.0.1
+
+dependency_overrides:
+  intl: 0.17.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  retrofit_generator: ^8.0.1
+  build_runner: ^2.1.7
+  mobx_codegen: ^2.0.4
+
+flutter_icons:
+  android: true 
+  ios: true
+  image_path: 'assets/icons/app_Icon/icon.png'
+  adaptive_icon_background: '#FFFFFF'  
+  adaptive_icon_foreground: 'assets/icons/app_Icon/icon_adaptive.png'
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+
+  assets:
+
+   - assets/lang/
+
+   - assets/icons/actions/web_view/
+
+   - assets/images/
+   - assets/icons/social_media_icons/
+
+   - assets/icons/social_media_icons/icons_history/
+
+   - assets/icons/library/navigation_bar/
+
+   - assets/icons/search/
+
+   - assets/icons/library/
+
+   - assets/icons/library/files/
+
+   - assets/icons/faces/
+   - assets/icons/
+
+   - assets/icons/actions/
+
+   - assets/icons/social_media_icons/filter_social_media/
+
+   - assets/icons/levels/
+
+   - assets/scripts/
+
+   - assets/icons/app_Icon/missions_page/
+
+   - assets/logo/
+
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Light.ttf
+          weight: 200
+        - asset: assets/fonts/Lato-Bold.ttf
+          weight: 700 
+
+    - family: Assistant
+      fonts:
+        - asset: assets/fonts/Assistant-Regular.ttf
+        - asset: assets/fonts/Assistant-Light.ttf
+          weight: 200
+        - asset: assets/fonts/Assistant-Bold.ttf
+          weight: 700 
+
+    
