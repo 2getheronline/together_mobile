@@ -13,9 +13,7 @@ part 'restClient.g.dart';
 
 
 @RestApi(baseUrl:
-    // "https://together-284709.nw.r.appspot.com/api/")
-         "http://192.168.33.13:8030/api/")
-    //    "https://together.clap.co.il/api/")
+    "https://api.together-il.online/api/")
 
 
 abstract class RestClient {

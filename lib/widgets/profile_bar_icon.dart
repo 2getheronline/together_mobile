@@ -9,7 +9,7 @@ class ProfileBarIcon extends StatelessWidget {
   ProfileBarIcon({this.selectedIndex, this.index, this.name, this.onPageChanged});
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return InkWell(
     child: Text(
       name,
       style: TextStyle(
@@ -17,7 +17,7 @@ class ProfileBarIcon extends StatelessWidget {
         fontWeight: FontWeight.bold
       ),
     ),
-    onPressed: () =>  onPageChanged!(index),
+    onTap: () =>  onPageChanged!(index),
   );
   }
 }

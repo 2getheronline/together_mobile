@@ -9,9 +9,7 @@ part of 'restClient.dart';
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
     baseUrl ??=
-    // "https://together-284709.nw.r.appspot.com/api/")
-    "http://192.168.33.13:8030/api/";
-       // "https://together.clap.co.il/api/";
+    "https://api.together-il.online/api/";
   }
 
   final Dio _dio;

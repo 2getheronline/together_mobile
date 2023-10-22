@@ -167,15 +167,15 @@ class _HomeState extends State<Home> {
                       //   height: 53,
                       //   margin: 0,
                       // ),
-                      SizedBox(height: 22),
-                      MyRaisedButton(
-                        title: AppLocalizations.of(context)!
-                            .translate('JOIN GROUP'),
-                        callback: joinGroup,
-                        width: MediaQuery.of(context).size.width - 40,
-                        height: 53,
-                        margin: 0,
-                      ),
+                      // SizedBox(height: 22),
+                      // MyRaisedButton(
+                      //   title: AppLocalizations.of(context)!
+                      //       .translate('JOIN GROUP'),
+                      //   callback: joinGroup,
+                      //   width: MediaQuery.of(context).size.width - 40,
+                      //   height: 53,
+                      //   margin: 0,
+                      // ),
                       SizedBox(height: 22),
                     ],
                   ),

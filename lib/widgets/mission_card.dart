@@ -58,7 +58,11 @@ class MissionCard extends StatelessWidget {
                     buildTimeLine(constrains, context),
                     buildTextBody(context),
                     mission!.current != null
-                        ? buildCircularPercentIndicator(constrains, context)
+                        ? Expanded(
+                            child: LayoutBuilder(
+                                builder: (context, constrains) =>
+                                    buildCircularPercentIndicator(
+                                        constrains, context)))
                         : SizedBox(
                             height: 10,
                           ),
@@ -93,101 +97,85 @@ class MissionCard extends StatelessWidget {
     });
   }
 
-  Expanded buildCircularPercentIndicator(
+  buildCircularPercentIndicator(
       BoxConstraints constrains, BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: constrains.maxHeight * 0.45,
-              child: Center(
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      //Coloquei este contaoner aspenas para usar a margem dele
-                      margin: EdgeInsets.only(
-                          top: constrains.maxHeight * 0.018 / 3,
-                          left: constrains.maxHeight * 0.018 / 5),
-                      child: CircularPercentIndicator(
-                        //Ela quer que tenha uma linha mais curta em baixo do spinner verde... entao adiconei este circulo em baixo
-                        radius: (constrains.maxHeight * 0.44) / 2,
-                        lineWidth: constrains.maxHeight * 0.01,
-                        backgroundColor: Color(0xFFF7F7F7),
-                      ),
-                    ),
-                    CircularPercentIndicator(
-                      radius: (constrains.maxHeight * 0.45) / 2,
-                      animation: true,
-                      animationDuration: 2500,
-                      lineWidth: constrains.maxHeight * 0.018,
-                      percent: mission!.current! / mission!.limit!,
-                      center: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(bottom: 4),
-                                child: SvgPicture.asset(
-                                  'assets/icons/faces/man_user.svg',
-                                  color: Color(0xffbcbcbf),
-                                  height: constrains.maxHeight * 0.022,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              AutoSizeText(
-                                "${mission!.current.toString()}",
-                                style: TextStyle(
-                                  // fontWeight:
-                                  //     FontWeight.w200,
-                                  color: Color(0xff313136),
-                                  fontSize: Helper.normalizePixel(context, 22),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 3.5,
-                          ),
-                          AutoSizeText(
-                            "/ ${mission!.limit.toString()}",
-                            style: TextStyle(
-                                // fontWeight:
-                                //     FontWeight.w200,
-                                color: Color(0xff3e4a59),
-                                fontSize: Helper.normalizePixel(context, 12)),
-                          ),
-                        ],
-                      ),
-                      circularStrokeCap: CircularStrokeCap.round,
-                      backgroundColor: Colors.transparent,
-                      //Color(0xFFF7F7F7),
-                      //progressColor: Colors.red
-                      linearGradient: LinearGradient(
-                        colors: [
-                          Color.fromRGBO(185, 255, 226, 1),
-                          Color.fromRGBO(0, 239, 141, 1),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomLeft,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+    return Center(
+        child: Stack(
+      children: <Widget>[
+        Container(
+          //Coloquei este contaoner aspenas para usar a margem dele
+
+          child: CircularPercentIndicator(
+            //Ela quer que tenha uma linha mais curta em baixo do spinner verde... entao adiconei este circulo em baixo
+            radius: (constrains.maxHeight ) / 2,
+            lineWidth: constrains.maxHeight * 0.01,
+            backgroundColor: Color(0xFFF7F7F7),
+          ),
         ),
-      ),
-    );
+        CircularPercentIndicator(
+          radius: (constrains.maxHeight) / 2,
+          animation: true,
+          animationDuration: 2500,
+          lineWidth: constrains.maxHeight * 0.018,
+          percent: mission!.current! / mission!.limit!,
+          center: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(bottom: 4),
+                    child: SvgPicture.asset(
+                      'assets/icons/faces/man_user.svg',
+                      color: Color(0xffbcbcbf),
+                      height: constrains.maxHeight * 0.022,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 3,
+                  ),
+                  AutoSizeText(
+                    "${mission!.current.toString()}",
+                    style: TextStyle(
+                      // fontWeight:
+                      //     FontWeight.w200,
+                      color: Color(0xff313136),
+                      fontSize: Helper.normalizePixel(context, 22),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 3.5,
+              ),
+              AutoSizeText(
+                "/ ${mission!.limit.toString()}",
+                style: TextStyle(
+                    // fontWeight:
+                    //     FontWeight.w200,
+                    color: Color(0xff3e4a59),
+                    fontSize: Helper.normalizePixel(context, 12)),
+              ),
+            ],
+          ),
+          circularStrokeCap: CircularStrokeCap.round,
+          backgroundColor: Colors.transparent,
+          //Color(0xFFF7F7F7),
+          //progressColor: Colors.red
+          linearGradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(185, 255, 226, 1),
+              Color.fromRGBO(0, 239, 141, 1),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomLeft,
+          ),
+        ),
+      ],
+    ));
   }
 
   Container buildTextBody(BuildContext context) {

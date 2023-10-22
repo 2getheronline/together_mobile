@@ -35,7 +35,7 @@ class _UserPageState extends State<UserPage> {
   void initState() {
     _pageController = PageController();
     server!.loadTopUsers();
-    server!.loadTopGroups();
+    // server!.loadTopGroups();
     server!.loadMyActivities();
 
 //    recalculateUserLevel();
@@ -170,7 +170,7 @@ class _UserPageState extends State<UserPage> {
                     //physics: NeverScrollableScrollPhysics(),
                     controller: _pageController,
                     onPageChanged: manualPageChanged,
-                    children: <Widget>[Scores(false),Scores(true), Activity(), Profile()],
+                    children: <Widget>[Scores(true), Activity(), Profile()],
                   ),
                 )
               ],
@@ -307,26 +307,26 @@ class _UserPageState extends State<UserPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
+                        // ProfileBarIcon(
+                        //   name: (AppLocalizations.of(context)!.translate('GROUPS')),
+                        //   index: 0,
+                        //   selectedIndex: _selectedIndex,
+                        //   onPageChanged: onPageChanged,
+                        // ),
                         ProfileBarIcon(
-                          name: (AppLocalizations.of(context)!.translate('GROUPS')),
+                          name: (AppLocalizations.of(context)!.translate('GAINERS')),
                           index: 0,
                           selectedIndex: _selectedIndex,
                           onPageChanged: onPageChanged,
                         ),
                         ProfileBarIcon(
-                          name: (AppLocalizations.of(context)!.translate('GAINERS')),
-                          index: 1,
-                          selectedIndex: _selectedIndex,
-                          onPageChanged: onPageChanged,
-                        ),
-                        ProfileBarIcon(
                             name: (AppLocalizations.of(context)!.translate('ACTIVITY')),
-                            index: 2,
+                            index: 1,
                             selectedIndex: _selectedIndex,
                             onPageChanged: onPageChanged),
                         ProfileBarIcon(
                             name: (AppLocalizations.of(context)!.translate('PROFILE')),
-                            index: 3,
+                            index: 2,
                             selectedIndex: _selectedIndex,
                             onPageChanged: onPageChanged),
                       ],
