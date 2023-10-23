@@ -315,11 +315,8 @@ class _RegisterState extends State<Register> {
                                         color: Colors.black),
                                     recognizer: new TapGestureRecognizer()
                                       ..onTap = () {
-                                        launch(_binding.selectedLanguage
-                                                    .language ==
-                                                "he"
-                                            ? 'https://together.clap.co.il/privacy_heb.pdf'
-                                            : 'https://together.clap.co.il/privacy.pdf');
+                                        launch(
+                                            'https://api.together-il.online/privacy${_binding.selectedLanguage.language == "he" ? "_heb" : ""}.pdf');
                                       },
                                   )
                                 ]))
@@ -337,102 +334,102 @@ class _RegisterState extends State<Register> {
                             },
                           ),
                           SizedBox(height: !small_screen ? 15 : 7),
-                          Container(
-                              child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: new Container(
-                                    margin: const EdgeInsets.only(right: 20.0),
-                                    child: Divider(
-                                      color: Colors.grey[400],
-                                      height: 36,
-                                    )),
-                              ),
-                              Text(
-                                AppLocalizations.of(context)!.translate("or")!,
-                                style: TextStyle(
-                                  color: Colors.grey[400],
-                                ),
-                              ),
-                              Expanded(
-                                child: new Container(
-                                    margin: const EdgeInsets.only(left: 20.0),
-                                    child: Divider(
-                                      color: Colors.grey[400],
-                                      height: 36,
-                                    )),
-                              ),
-                            ],
-                          )),
-                          SizedBox(height: !small_screen ? 12 : 6),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 40,
-                            height: 53,
-                            child: TextButton(
-                                style: TextButton.styleFrom(
-                                    shape: (RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100),
-                                    )),
-                                    primary: Colors.black,
-                                    backgroundColor:
-                                        Color.fromRGBO(244, 245, 251, 1)),
-                                onPressed: () {
-                                  signUp('google');
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                        'assets/icons/social_media_icons/google.svg',
-                                        width: 24),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      AppLocalizations.of(context)!.translate(
-                                              'Continue with Google') ??
-                                          "",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                )),
-                          ),
-                          SizedBox(height: !small_screen ? 8 : 4),
-                          if (Platform.isIOS)
-                            Container(
-                              width: MediaQuery.of(context).size.width - 40,
-                              height: 53,
-                              child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      shape: (RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                      )),
-                                      primary: Colors.black,
-                                      backgroundColor:
-                                          Color.fromRGBO(244, 245, 251, 1)),
-                                  onPressed: () {
-                                    signUp('apple');
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                          'assets/icons/social_media_icons/apple.svg',
-                                          width: 24),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        AppLocalizations.of(context)!.translate(
-                                                'Continue with Apple') ??
-                                            "",
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                          SizedBox(height: 10),
+                          // Container(
+                          //     child: Row(
+                          //   children: <Widget>[
+                          //     Expanded(
+                          //       child: new Container(
+                          //           margin: const EdgeInsets.only(right: 20.0),
+                          //           child: Divider(
+                          //             color: Colors.grey[400],
+                          //             height: 36,
+                          //           )),
+                          //     ),
+                          //     Text(
+                          //       AppLocalizations.of(context)!.translate("or")!,
+                          //       style: TextStyle(
+                          //         color: Colors.grey[400],
+                          //       ),
+                          //     ),
+                          //     Expanded(
+                          //       child: new Container(
+                          //           margin: const EdgeInsets.only(left: 20.0),
+                          //           child: Divider(
+                          //             color: Colors.grey[400],
+                          //             height: 36,
+                          //           )),
+                          //     ),
+                          //   ],
+                          // )),
+                          // SizedBox(height: !small_screen ? 12 : 6),
+                          // Container(
+                          //   width: MediaQuery.of(context).size.width - 40,
+                          //   height: 53,
+                          //   child: TextButton(
+                          //       style: TextButton.styleFrom(
+                          //           shape: (RoundedRectangleBorder(
+                          //             borderRadius: BorderRadius.circular(100),
+                          //           )),
+                          //           primary: Colors.black,
+                          //           backgroundColor:
+                          //               Color.fromRGBO(244, 245, 251, 1)),
+                          //       onPressed: () {
+                          //         signUp('google');
+                          //       },
+                          //       child: Row(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           SvgPicture.asset(
+                          //               'assets/icons/social_media_icons/google.svg',
+                          //               width: 24),
+                          //           SizedBox(width: 5),
+                          //           Text(
+                          //             AppLocalizations.of(context)!.translate(
+                          //                     'Continue with Google') ??
+                          //                 "",
+                          //             style: TextStyle(
+                          //                 fontSize: 17,
+                          //                 fontWeight: FontWeight.w400),
+                          //           ),
+                          //         ],
+                          //       )),
+                          // ),
+                          // SizedBox(height: !small_screen ? 8 : 4),
+                          // if (Platform.isIOS)
+                          //   Container(
+                          //     width: MediaQuery.of(context).size.width - 40,
+                          //     height: 53,
+                          //     child: TextButton(
+                          //         style: TextButton.styleFrom(
+                          //             shape: (RoundedRectangleBorder(
+                          //               borderRadius:
+                          //                   BorderRadius.circular(100),
+                          //             )),
+                          //             primary: Colors.black,
+                          //             backgroundColor:
+                          //                 Color.fromRGBO(244, 245, 251, 1)),
+                          //         onPressed: () {
+                          //           signUp('apple');
+                          //         },
+                          //         child: Row(
+                          //           mainAxisAlignment: MainAxisAlignment.center,
+                          //           children: [
+                          //             SvgPicture.asset(
+                          //                 'assets/icons/social_media_icons/apple.svg',
+                          //                 width: 24),
+                          //             SizedBox(width: 5),
+                          //             Text(
+                          //               AppLocalizations.of(context)!.translate(
+                          //                       'Continue with Apple') ??
+                          //                   "",
+                          //               style: TextStyle(
+                          //                   fontSize: 17,
+                          //                   fontWeight: FontWeight.w400),
+                          //             ),
+                          //           ],
+                          //         )),
+                          //   ),
+                          // SizedBox(height: 10),
                         ],
                       ),
                     ),

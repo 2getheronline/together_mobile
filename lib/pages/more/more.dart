@@ -16,7 +16,7 @@ class More extends StatelessWidget {
   void openPrivacy()
   {
     String file = _binding.selectedLanguage.language == "he" ? "privacy_heb.pdf" : "privacy.pdf";
-    launch("https://together.clap.co.il/"+file);
+    launch("https://api.together-il.online/"+file);
   }
 
   @override
