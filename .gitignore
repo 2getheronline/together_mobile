@@ -77,6 +77,6 @@ mysample/
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 debug.keystore
-key.jks
+**/key.jks
 .flutter-plugins-dependencies
 togetheornline.p12
