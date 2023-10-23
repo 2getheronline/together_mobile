@@ -31,21 +31,21 @@ class _WebviewState extends State<Webview> {
   bool? canEndMission = false;
   String? currentUrl;
 
-  Map<String, dynamic> performedActions = {
-    'like': {
-      'status': false,
-    },
-    'dislike': {
-      'status': false,
-    },
-    'rate': {'status': false, 'value': -1},
-    'comment': {'status': false, 'value': ''},
-    'report': {
-      'status': false,
-    },
-    'retweet': {'status': false},
-    'post': {'status': false}
-  };
+  // Map<String, dynamic> performedActions = {
+  //   'like': {
+  //     'status': false,
+  //   },
+  //   'dislike': {
+  //     'status': false,
+  //   },
+  //   'rate': {'status': false, 'value': -1},
+  //   'comment': {'status': false, 'value': ''},
+  //   'report': {
+  //     'status': false,
+  //   },
+  //   'retweet': {'status': false},
+  //   'post': {'status': false}
+  // };
 
   List<dynamic>? subs;
 
@@ -68,9 +68,9 @@ class _WebviewState extends State<Webview> {
 
   missionCompleted() async {
     Map<String, bool> actions = {};
-    performedActions.forEach((key, val) {
-      actions[key] = (val['status'] == "true" || val['status'] == true);
-    });
+    // performedActions.forEach((key, val) {
+    //   actions[key] = (val['status'] == "true" || val['status'] == true);
+    // });
     Navigator.of(context).pop(actions);
   }
 
@@ -79,7 +79,6 @@ class _WebviewState extends State<Webview> {
     final String? action = args[0];
     final String actionName = args[1].toString().split(".")[0];
     bool tmpCanEndMission = true;
-//    final String value = args[1].toString().split(".")[1];
 
     setState(() {
       mission!.actions!.forEach((action) {
@@ -87,227 +86,46 @@ class _WebviewState extends State<Webview> {
           action.done = true; //value.trim() != '' && value != 'false';
         }
 
-        if(action.done == false)
-          tmpCanEndMission = false;
+        if (action.done == false) tmpCanEndMission = false;
       });
 
       canEndMission = tmpCanEndMission;
-
-      // canEndMission = mission!.actions!
-      //     .reduce((value, element) => value!..done &= element!.done)!
-      //     .done;
     });
-
-//    if (this.mission.getMissionTarget().id == 2) {
-//      if (action == 'click') {
-//        if (value == 'post') {
-//          performedActions['post'] = {
-//            'status': true,
-//          };
-//        } else {
-//          final star = int.parse(value.replaceAll('star.', ''));
-//          if (performedActions['rate']['value'] == star) {
-//            performedActions['rate'] = {
-//              'status': false,
-//              'value': performedActions['rate']['value'] - 1
-//            };
-//          } else {
-//            performedActions['rate'] = {'status': true, 'value': star};
-//          }
-//        }
-//      } else if (action == 'text') {
-//        if (value != null && value.trim() != '') {
-//          performedActions['comment'] = {'status': true, 'value': value};
-//        } else {
-//          performedActions['comment'] = {'status': false, 'value': ''};
-//        }
-//      }
-//
-//      bool completed = true;
-//
-//      if (widget.args['hasComment'] &&
-//          performedActions['comment']['status'] == false) {
-//        completed = false;
-//      }
-//      if ((widget.args['hasRate'] &&
-//              performedActions['rate']['status'] == false) ||
-//          performedActions['post']['status'] == false) {
-//        completed = false;
-//      }
-//
-//      ;
-//    } else if (this.mission.getMissionTarget().id == 1) {
-//      if (action == 'click') {
-//        if (value == 'report') {
-//          performedActions['report'] = {
-//            'status': true,
-//          };
-//        } else if (value == 'like.true') {
-//          performedActions['like']['status'] = true;
-//        } else if (value == 'like.false') {
-//          performedActions['like']['status'] = false;
-//        } else if (value == 'like_page') {
-//          performedActions['like']['status'] =
-//              !performedActions['like']['status'];
-//        } else if (value == 'terrorism' ||
-//            value == 'hate' ||
-//            value == 'inappropriate') {
-//          //TODO: Check pressed report option
-//        } else if (value == 'post') {
-//          performedActions['post'] = {'status': true};
-//        }
-//      } else if (action == 'text') {
-//        if (value != null && value.trim() != '') {
-//          performedActions['comment'] = {'status': true, 'value': value};
-//        } else {
-//          performedActions['comment'] = {'status': false, 'value': ''};
-//        }
-//      }
-//
-//      bool completed = true;
-//
-//      if (widget.args['hasLike'] &&
-//          performedActions['like']['status'] == false) {
-//        completed = false;
-//      }
-//      if (widget.args['hasComment'] &&
-//              (performedActions['comment']['status'] == false) ||
-//          performedActions['post']['status'] == false) {
-//        completed = false;
-//      }
-//      if (widget.args['hasReport'] &&
-//          performedActions['report']['status'] == false) {
-//        completed = false;
-//      }
-//
-//      setState(() {
-//        canEndMission = completed;
-//      });
-//    } else if (this.mission.getMissionTarget().id == 5) {
-//      if (action == 'click') {
-//        if (value == 'report') {
-//          performedActions['report'] = {
-//            'status': true,
-//          };
-//        } else if (value == 'like') {
-//          performedActions['like']['status'] =
-//              !performedActions['like']['status'];
-//        } else if (value == 'retweet') {
-//          performedActions['retweet']['status'] = true;
-//        } else if (value == 'unretweet') {
-//          performedActions['retweet']['status'] = false;
-//        } else if (value == 'post') {
-//          performedActions['post'] = {'status': true};
-//        }
-//      } else if (action == 'text') {
-//        if (value != null && value.trim() != '') {
-//          performedActions['comment'] = {'status': true, 'value': value};
-//        } else {
-//          performedActions['comment'] = {'status': false, 'value': ''};
-//        }
-//      }
-//
-//      bool completed = true;
-//
-//      if (widget.args['hasLike'] &&
-//          performedActions['like']['status'] == false) {
-//        completed = false;
-//      }
-//      if ((widget.args['hasComment'] &&
-//              performedActions['comment']['status'] == false) &&
-//          performedActions['post']['status'] == false) {
-//        completed = false;
-//      }
-//      if (widget.args['hasReport'] &&
-//          performedActions['report']['status'] == false) {
-//        completed = false;
-//      }
-//      if (widget.args['hasRetweet'] &&
-//          performedActions['retweet']['status'] == false) {
-//        completed = false;
-//      }
-//
-//      setState(() {
-//        canEndMission = completed;
-//      });
-//    } else if (this.mission.getMissionTarget().id == 4) {
-//      if (currentUrl.indexOf('https://www.instagram.com/accounts/') != -1)
-//        return;
-//
-//      if (action == 'click') {
-//        if (value == 'report') {
-//          performedActions['report'] = {
-//            'status': true,
-//          };
-//        } else if (value == 'like') {
-//          performedActions['like']['status'] =
-//              !performedActions['like']['status'];
-//        } else if (value == 'post') {
-//          performedActions['post'] = {'status': true};
-//        }
-//      } else if (action == 'text') {
-//        if (value != null && value.trim() != '') {
-//          performedActions['comment'] = {'status': true, 'value': value};
-//        } else {
-//          performedActions['comment'] = {'status': false, 'value': ''};
-//        }
-//      }
-//
-//      bool completed = true;
-//
-//      if (widget.args['hasLike'] &&
-//          performedActions['like']['status'] == false) {
-//        completed = false;
-//      }
-//      if ((widget.args['hasComment'] &&
-//              performedActions['comment']['status'] == false) &&
-//          performedActions['post']['status'] == false) {
-//        completed = false;
-//      }
-//      if (widget.args['hasReport'] &&
-//          performedActions['report']['status'] == false) {
-//        completed = false;
-//      }
-//
-//      setState(() {
-//        canEndMission = completed;
-//      });
-//    }
   }
 
-  loadScript() async {
-    String? script =
-        await LocalStorageProvider.getScript(this.mission!.target!.name!);
-    if (script != null) {
-      webView.evaluateJavascript(source: script);
-      print('Evaluated script');
-      return;
-    }
-
-    switch (this.mission!.target!.id) {
-      case 1:
-        await webView.injectJavascriptFileFromAsset(
-            assetFilePath: 'assets/scripts/facebook.js');
-        break;
-      case 2:
-        await webView.injectJavascriptFileFromAsset(
-            assetFilePath: 'assets/scripts/google.js');
-        break;
-      case 3:
-        await webView.injectJavascriptFileFromAsset(
-            assetFilePath: 'assets/scripts/youtube.js');
-        break;
-      case 4:
-        await webView.injectJavascriptFileFromAsset(
-            assetFilePath: 'assets/scripts/instagram.js');
-        break;
-      case 5:
-        await webView.injectJavascriptFileFromAsset(
-            assetFilePath: 'assets/scripts/twitter.js');
-        break;
-    }
-    print('Loaded script file');
-  }
+  // loadScript() async {
+  //   String? script =
+  //       await LocalStorageProvider.getScript(this.mission!.target!.name!);
+  //   if (script != null) {
+  //     webView.evaluateJavascript(source: script);
+  //     print('Evaluated script');
+  //     return;
+  //   }
+  //
+  //   switch (this.mission!.target!.id) {
+  //     case 1:
+  //       await webView.injectJavascriptFileFromAsset(
+  //           assetFilePath: 'assets/scripts/facebook.js');
+  //       break;
+  //     case 2:
+  //       await webView.injectJavascriptFileFromAsset(
+  //           assetFilePath: 'assets/scripts/google.js');
+  //       break;
+  //     case 3:
+  //       await webView.injectJavascriptFileFromAsset(
+  //           assetFilePath: 'assets/scripts/youtube.js');
+  //       break;
+  //     case 4:
+  //       await webView.injectJavascriptFileFromAsset(
+  //           assetFilePath: 'assets/scripts/instagram.js');
+  //       break;
+  //     case 5:
+  //       await webView.injectJavascriptFileFromAsset(
+  //           assetFilePath: 'assets/scripts/twitter.js');
+  //       break;
+  //   }
+  //   print('Loaded script file');
+  // }
 
   reload() {
     this
@@ -381,10 +199,9 @@ class _WebviewState extends State<Webview> {
                   initialUrlRequest: URLRequest(url: Uri.parse('about:blank')),
                   initialOptions: InAppWebViewGroupOptions(
                     crossPlatform: InAppWebViewOptions(
-                        userAgent: Platform.isAndroid ?
-                        "Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36":
-                        "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Mobile/15E148 Safari/604.1"
-                    ),
+                        userAgent: Platform.isAndroid
+                            ? "Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36"
+                            : "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Mobile/15E148 Safari/604.1"),
                   ),
                   onWebViewCreated: (InAppWebViewController controller) {
                     webView = controller;
@@ -421,7 +238,7 @@ class _WebviewState extends State<Webview> {
                       webView.addJavaScriptHandler(
                           handlerName: 'handler', callback: handler);
 
-                      await loadScript();
+                      // await loadScript();
 
                       print('Loaded');
                     }
@@ -462,13 +279,23 @@ class _WebviewState extends State<Webview> {
                                             CrossAxisAlignment.start,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
-                                          Container(
-                                            child: a!.done
-                                                ? SvgPicture.asset(
-                                                    'assets/icons/actions/web_view/green_check.svg')
-                                                : SvgPicture.asset(
-                                                    'assets/icons/actions/web_view/outlined_check.svg'),
-                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  a.done = !a.done;
+                                                  canEndMission = mission!
+                                                      .actions!
+                                                      .every((a) =>
+                                                          a!.done == true);
+                                                });
+                                              },
+                                              child: Container(
+                                                child: a!.done
+                                                    ? SvgPicture.asset(
+                                                        'assets/icons/actions/web_view/green_check.svg')
+                                                    : SvgPicture.asset(
+                                                        'assets/icons/actions/web_view/outlined_check.svg'),
+                                              )),
                                           counter ==
                                                   mission!.actions!
                                                       .length //Para nao imprimir uma linha apos o ultimo
