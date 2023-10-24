@@ -3,15 +3,16 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:together_online/app_localizations.dart';
 import 'package:together_online/models/user.dart' as U;
 import 'package:together_online/providers/dataBinding.dart';
 import 'package:together_online/providers/database.dart';
 import 'package:together_online/providers/server.dart';
-
 
 import 'dart:convert';
 import 'dart:math';
@@ -84,7 +85,7 @@ class Auth {
     if (user == null) return;
 
     final idTokenResult = await user.getIdToken();
-    await server!.login(idTokenResult??"",
+    await server!.login(idTokenResult ?? "",
         groupId: groupId,
         groupPassword: groupPassword,
         name: user.displayName ?? "");
@@ -93,37 +94,36 @@ class Auth {
 
   static Future<Map<String, dynamic>?> signInWithGoogle() async {
     try {
-    GoogleSignInAccount? account = await googleSignIn.signIn();
-    if (account == null) return null;
-    
-    GoogleSignInAuthentication googleAuth = await account.authentication;
+      GoogleSignInAccount? account = await googleSignIn.signIn();
+      if (account == null) return null;
 
-    AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+      GoogleSignInAuthentication googleAuth = await account.authentication;
 
-    try {
-      await firebaseAuth.signInWithCredential(credential);
+      AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+
+      try {
+        await firebaseAuth.signInWithCredential(credential);
+      } catch (e) {
+        return {'success': false, 'error': getExceptionText(e as Exception)};
+      }
+      bool success = await getSession();
+      // ignore: unrelated_type_equality_checks
+      if (success == true) {
+        return {'success': true, 'error': null};
+      } else {
+        print('Something went wrong... ');
+
+        googleSignIn.signOut();
+        return {
+          'success': false,
+          'error': "I couldn't add your user to the database"
+        };
+      }
     } catch (e) {
-      return {'success': false, 'error': getExceptionText(e as Exception)};
-    }
-    bool success = await getSession();
-    // ignore: unrelated_type_equality_checks
-    if (success == true) {
-      return {'success': true, 'error': null};
-    } else {
-      print('Something went wrong... ');
-
-      googleSignIn.signOut();
-      return {
-        'success': false,
-        'error': "I couldn't add your user to the database"
-      };
-    }
-    } catch (e) {
-        print(e);
+      print(e);
     }
   }
-
 
   /// Generates a cryptographically secure random nonce, to be included in a
   /// credential request.
@@ -250,7 +250,8 @@ class Auth {
     if (success == true) {
       _binding.session!.auth!.name = name!;
       server!.editUser();
-      sleep(Duration(seconds: 2));if (success) {
+      sleep(Duration(seconds: 2));
+      if (success) {
         return {'success': true, 'error': null};
       } else {
         print('Something went wrong... ');
@@ -388,6 +389,60 @@ class Auth {
       'email': email,
       'password': password,
     };
+  }
+
+  static deleteUser(context) {
+    TextEditingController passwordController = TextEditingController();
+    showDialog(
+        context: context,
+        builder: (context) => Dialog(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(AppLocalizations.of(context)!
+                          .translate('Delete account') ??
+                      ""),
+                  TextField(
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      labelText:
+                          AppLocalizations.of(context)!.translate('Password'),
+                      labelStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(AppLocalizations.of(context)!
+                                  .translate('Cancel') ??
+                              ""),
+                        ),
+                        TextButton(
+                          onPressed: () async{
+                            await FirebaseAuth.instance.currentUser!
+                                .reauthenticateWithCredential(
+                                    EmailAuthProvider.credential(
+                                        email: FirebaseAuth
+                                            .instance.currentUser!.email!,
+                                        password: passwordController.text));
+
+                            await FirebaseAuth.instance.currentUser!.delete();
+                            await deleteCredentials();
+                            Auth.saveToken("");
+                            _binding.session!.auth = null;
+                            Navigator.of(context).popAndPushNamed('home');
+                          },
+                          child: Text(AppLocalizations.of(context)!
+                                  .translate('Delete') ??
+                              ""),
+                        ),
+                      ]),
+                ],
+              ),
+            ));
   }
 
   static String getExceptionText(Exception e) {

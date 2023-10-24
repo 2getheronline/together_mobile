@@ -137,72 +137,7 @@ class _ProfileState extends State<Profile> {
                   SizedBox(
                     height: 40,
                   ),
-                  // Text(
-                  //   AppLocalizations.of(context)!.translate('Organize Missions')!.toUpperCase(),
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     color: Colors.grey,
-                  //   ),
-                  // ),
-                  // ListTile(
-                  //   contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  //   title: Text(AppLocalizations.of(context)!.translate('Facebook')!),
-                  //   trailing: CupertinoSwitch(
-                  //     activeColor: Colors.blueAccent,
-                  //     value: missionPreferences['facebook']??false,
-                  //     onChanged: (val) {
-                  //       updateMissionPreferences('facebook', val);
-                  //     },
-                  //   ),
-                  // ),
-                  // Divider(),
-                  // ListTile(
-                  //   contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  //   title: Text(AppLocalizations.of(context)!.translate('Twitter')!),
-                  //   trailing: CupertinoSwitch(
-                  //     activeColor: Colors.blueAccent,
-                  //     value: missionPreferences['twitter'] ?? false,
-                  //     onChanged: (val) {
-                  //       updateMissionPreferences('twitter', val);
-                  //     },
-                  //   ),
-                  // ),
-                  // Divider(),
-                  // ListTile(
-                  //   contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  //   title: Text(AppLocalizations.of(context)!.translate('YouTube')!),
-                  //   trailing: CupertinoSwitch(
-                  //     activeColor: Colors.blueAccent,
-                  //     value: missionPreferences['youtube']??false,
-                  //     onChanged: (val) {
-                  //       updateMissionPreferences('youtube', val);
-                  //     },
-                  //   ),
-                  // ),
-                  // Divider(),
-                  // ListTile(
-                  //   contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  //   title: Text(AppLocalizations.of(context)!.translate('Instagram')!),
-                  //   trailing: CupertinoSwitch(
-                  //     activeColor: Colors.blueAccent,
-                  //     value: missionPreferences['instagram']??false,
-                  //     onChanged: (val) {
-                  //       updateMissionPreferences('instagram', val);
-                  //     },
-                  //   ),
-                  // ),
-                  // Divider(),
-                  // ListTile(
-                  //   contentPadding: EdgeInsets.symmetric(vertical: 10),
-                  //   title: Text(AppLocalizations.of(context)!.translate('Google')!),
-                  //   trailing: CupertinoSwitch(
-                  //     activeColor: Colors.blueAccent,
-                  //     value: missionPreferences['google']??false,
-                  //     onChanged: (val) {
-                  //       updateMissionPreferences('google', val);
-                  //     },
-                  //   ),
-                  // ),
+
                   Divider(),
                   ListTile(
                     onTap: () async {
@@ -213,6 +148,14 @@ class _ProfileState extends State<Profile> {
                     contentPadding: EdgeInsets.symmetric(vertical: 10),
                     title: Text(AppLocalizations.of(context)!.translate('Log out')!, style: TextStyle(color: Color(0xff2a388f))),
                     leading: Icon(Icons.power_settings_new, color: Color(0xff2a388f),)
+                  ),
+
+                  Divider(),
+                  ListTile(
+                      onTap: () => Auth.deleteUser(context),
+                      contentPadding: EdgeInsets.symmetric(vertical: 10),
+                      title: Text(AppLocalizations.of(context)!.translate('Delete User')!, style: TextStyle(color: Colors.red)),
+                      leading: Icon(Icons.delete, color:  Colors.red)
                   ),
 
                   // TextFormField(
